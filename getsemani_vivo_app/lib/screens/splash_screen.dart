@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 import '../utils/constants.dart';
 import 'login_screen.dart';
-import 'home_screen.dart';
+import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navegar a la pantalla correspondiente
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => isAuthenticated ? const HomeScreen() : const LoginScreen(),
+        builder: (context) => isAuthenticated ? const MainScreen() : const LoginScreen(),
       ),
     );
   }
