@@ -1,0 +1,40 @@
+name: getsemani_vivo_app
+description: App móvil para el barrio Getsemaní, Cartagena
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Iconos
+  cupertino_icons: ^1.0.8
+  
+  # HTTP para conectar con la API
+  http: ^1.2.0
+  
+  # Almacenamiento local (guardar token)
+  shared_preferences: ^2.2.2
+  
+  # Manejo de estados
+  provider: ^6.1.1
+  
+  # Navegación
+  go_router: ^14.0.0
+  
+  # Imágenes de red
+  cached_network_image: ^3.3.1
+  
+  # Mapas (para después)
+  # google_maps_flutter: ^2.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
