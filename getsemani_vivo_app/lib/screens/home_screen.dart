@@ -20,8 +20,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Business> _businesses = [];
+  List<Business> _filteredBusinesses = [];
   bool _isLoading = true;
   String? _selectedCategory;
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -39,9 +41,23 @@ class _HomeScreenState extends State<HomeScreen> {
     if (mounted) {
       setState(() {
         _businesses = businesses;
+        _filteredBusinesses = businesses;
         _isLoading = false;
       });
     }
+  }
+
+  void _filterBusinesses(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        _filteredBusinesses = _businesses;
+      } else {
+        _filteredBusinesses = _businesses.where((b) =>
+          b.name.toLowerCase().contains(query.toLowerCase()) ||
+          b.address.toLowerCase().contains(query.toLowerCase())
+        ).toList();
+      }
+    });
   }
 
   void _selectCategory(String? category) {
@@ -79,12 +95,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: AppColors.white,
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  'Descubre los mejores lugares de Getsemaní',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.white.withValues(alpha: 0.8),
+                const SizedBox(height: 12),
+                // Barra de búsqueda
+                TextField(
+                  controller: _searchController,
+                  onChanged: _filterBusinesses,
+                  decoration: InputDecoration(
+                    hintText: 'Buscar negocios...',
+                    prefixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: AppColors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   ),
                 ),
               ],
@@ -138,10 +163,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         onRefresh: _loadBusinesses,
                         child: ListView.builder(
                           padding: const EdgeInsets.all(16),
-                          itemCount: _businesses.length,
+                          itemCount: _filteredBusinesses.length,
                           itemBuilder: (context, index) {
                             return BusinessCard(
-                              business: _businesses[index],
+                              business: _filteredBusinesses[index],
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(

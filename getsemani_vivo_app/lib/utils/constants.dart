@@ -35,8 +35,7 @@ class AppColors {
 
 class ApiConfig {
   // URL base de la API (cambiar en producción)
-     static const String baseUrl = 'http://localhost:8000';  // Para web/Chrome
-  // static const String baseUrl = 'http://localhost:8000';  // Para web
+     static const String baseUrl = 'http://localhost:8000';
   // static const String baseUrl = 'http://TU_IP:8000';  // Para dispositivo físico
   
   // Endpoints
